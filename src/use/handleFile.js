@@ -47,28 +47,46 @@ function handleFile(config, fileOption) {
     dir: constant.dir,
     name: dir
   });
-  completePath = path.format({
+  const currFilePath = path.format({
     dir: completePath,
     name: fileOption.path
   });
   const format = fileOption.format;
-  const content = fileOption.content;
-  let formatFunc = () => '???';
 
-  Log.push('handle file:', completePath);
-  Log.push('  -> file path:', completePath);
+  let _content = fileOption.content;
+  const otherActions = content => {
+    let formatFunc = () => '???';
 
-  if (!format) {
-    formatFunc = () => content;
-  } else if (ut.isFunction(format)) {
-    formatFunc = format;
+    Log.push('  -> file path:', currFilePath);
+
+    if (!format) {
+      formatFunc = () => content;
+    } else if (ut.isFunction(format)) {
+      formatFunc = data => format(data, content);
+    }
+    return writeFile(currFilePath, formatFunc).then(() =>
+      Log.push('    :success')
+    );
+  };
+  // content is path
+  if (/^@path\:/.test(_content)) {
+    const contentFilePath = path.format({
+      dir: completePath,
+      name: _content.replace('@path:', '')
+    });
+    return fse
+      .readFile(contentFilePath, 'utf8')
+      .then(data => otherActions(data));
+  } else {
+    return otherActions(_content);
   }
-
-  return writeFile(completePath, formatFunc);
 }
 function handleFiles(config, fileOptions) {
   //   index = index !== undefined ? index : 0;
   let loop = Promise.resolve();
+
+  Log.push('handle file:');
+
   for (let item, i = 0; i < fileOptions.length; i++) {
     item = fileOptions[i];
     loop = loop.then(() => {

@@ -10,7 +10,7 @@ const helpString = ` config type:
       files: [
         {
           path: file path
-          format?: function
+          format?: (beforeContent, content) => content // beforeContent value = create? '' : content
           content: string | file path(eg. "@path:22.js" distinguish normal string)
         }
       ]
