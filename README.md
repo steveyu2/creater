@@ -11,6 +11,62 @@ Warning: Be sure to use it in Git (or other) environments, or you will not be ab
 
 # Usage
 
+[See Example](https://github.com/qw110946/creater-example)
+
+> Clone example
+
+    clone https://github.com/qw110946/creater-example.git
+    npm install
+
+> package.json
+
+    {
+      ...
+      "scripts": {
+          ...
+          "creater": "creater-cli -u"
+      },
+      ...
+    }
+
+> ./creater/config1.js
+
+    module.exports = {
+      config: {
+        dir: "src"
+      },
+      files: [
+        {
+          path: "newFile.js",
+          content: "i am new file"
+        },
+        {
+          path: "newFile.css",
+          content: "i am new css file in css folder"
+        }
+      ]
+    };
+
+> Run command
+
+    npm run creater creater/config1.js
+    .
+    read config file:
+      -> file path: E:\mygit\creater-example\creater/config1.js
+    handle file:
+      -> file path: E:\mygit\creater-example\src\newFile.js
+        :success
+      -> file path: E:\mygit\creater-example\src\css/newFile.css
+        :success
+    .
+
+> src
+
+    // src/newFile.js
+    i am new file
+    // src/css/newFile.css
+    i am new css file in css folder
+
 # Api
 
 | name            | required | default                               | type     | description                                                                                                         |
