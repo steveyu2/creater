@@ -10,7 +10,7 @@ const helpString = ` config type:
       files: [
         {
           path: file path
-          format?: (prevContent, content) => content 
+          format?: function | funcion[] (prevContent, content) => content 
           // prevContent value = isExist(files[0].path)? files[0] content: '';
           content?: string | file path(eg. "@path:22.js" distinguish normal string)
         }
@@ -39,8 +39,11 @@ module.exports = function(options) {
         if (ut.isObject(item)) {
           if (
             ut.isString(item.path) &&
-            ut.isString(item.content) &&
-            (item.format === undefined || ut.isFunction(item.format))
+            (item.content === undefined || ut.isString(item.content)) &&
+            (item.format === undefined ||
+              ut.isFunction(item.format) ||
+              (ut.isArray(item.format) &&
+                item.format.every(v => ut.isFunction(v))))
           ) {
             continue;
           }

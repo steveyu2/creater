@@ -9,7 +9,7 @@ const Log = require('../../lib/util/log');
 
 const isTextFile = require('../../lib/util/isTextFile');
 
-function writeFile(path, contentFormat) {
+function writeFile(path, formats) {
   let type = 'update';
   const isTextFileResult = isTextFile(path);
   if (isTextFileResult !== true) {
@@ -28,13 +28,22 @@ function writeFile(path, contentFormat) {
       return Promise.reject('error: ', errorMsg.type.textFile);
     }
   }
+  const contentFormat = (_formats, data) => {
+    if (Array.isArray(_formats)) {
+      return _formats.reduce((result, format) => {
+        return format(result) || '';
+      }, data);
+    } else {
+      return _formats(data);
+    }
+  };
 
   if (type === 'create') {
     // console.log('contentFormat()', contentFormat());
-    return fse.outputFile(path, contentFormat('') || '');
+    return fse.outputFile(path, contentFormat(formats, '') || '');
   } else if (type === 'update') {
     return fse.readFile(path, 'utf8').then(data => {
-      return fse.writeFile(path, contentFormat(data) || '', 'utf8');
+      return fse.writeFile(path, contentFormat(formats, data) || '', 'utf8');
     });
   }
 
@@ -55,7 +64,7 @@ function handleFile(config, fileOption) {
 
   let _content = fileOption.content;
   const otherActions = content => {
-    let formatFunc = () => '???';
+    let formatFunc;
 
     Log.push('  -> file path:', currFilePath);
 
@@ -63,7 +72,11 @@ function handleFile(config, fileOption) {
       formatFunc = () => content;
     } else if (ut.isFunction(format)) {
       formatFunc = data => format(data, content);
+    } else if (ut.isArray(format)) {
+      formatFunc = [...format];
+      formatFunc[0] = data => format[0](data, content);
     }
+
     return writeFile(currFilePath, formatFunc).then(() =>
       Log.push('    :success')
     );

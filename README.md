@@ -29,11 +29,13 @@ Warning: Be sure to use it in Git (or other) environments, or you will not be ab
       ...
     }
 
+### example1
+
 > ./creater/config1.js
 
     module.exports = {
       config: {
-        dir: "src"
+        dir: "src/example1"
       },
       files: [
         {
@@ -52,34 +54,58 @@ Warning: Be sure to use it in Git (or other) environments, or you will not be ab
     npm run creater creater/config1.js
     .
     read config file:
-      -> file path: E:\mygit\creater-example\creater/config1.js
+      -> file path: /Users/developer5/src/creater-example/creater/config1.js
     handle file:
-      -> file path: E:\mygit\creater-example\src\newFile.js
+      -> file path: /Users/developer5/src/creater-example/src/example1/newFile.js
         :success
-      -> file path: E:\mygit\creater-example\src\css/newFile.css
+      -> file path: /Users/developer5/src/creater-example/src/example1/css/newFile.css
         :success
     .
 
-> src
+> src/example1
 
-    // src/newFile.js
+    // src/example1/newFile.js
     i am new file
-    // src/css/newFile.css
+    // src/example1/css/newFile.css
     i am new css file in css folder
+
+### example2
+
+> src/example2
+
+    // src/example2/actions
+    const types = require('./types');
+
+    export const getUser = () => {
+      return types.GET_USER;
+    };
+
+    export default {
+      getUser
+    };
+
+    // src/example2/types
+    export const GET_USER = 'get_user';
+
+    export default {GET_USER};
 
 # Api
 
-| name            | required | default                               | type     | description                                                                                                         |
-| --------------- | -------- | ------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------- |
-| config          | false    | undefined                             | object   | config                                                                                                              |
-| config.dir      | false    | ""                                    | string   | dir                                                                                                                 |
-| files           | true     |                                       | array    | dir                                                                                                                 |
-| files[].path    | true     |                                       | string   | Files you need to create or change                                                                                  |
-| files[].format  | false    | (prevContent, content) => prevContent | function | format content.<br/>prevContent: 'files[].path' points to the file.<br/>content: 'files[].content' like prevContent |
-| files[].content | false    | ""                                    | string   | You want to write in 'files[].path'.<br/>It can be a file path                                                      |
+| name            | required | default                               | type                   | description                                                                                                         |
+| --------------- | -------- | ------------------------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| config          | false    | undefined                             | object                 | config                                                                                                              |
+| config.dir      | false    | ""                                    | string                 | dir                                                                                                                 |
+| files           | true     |                                       | array                  | dir                                                                                                                 |
+| files[].path    | true     |                                       | string                 | Files you need to create or change                                                                                  |
+| files[].format  | false    | (prevContent, content) => prevContent | function \| function[] | format content.<br/>prevContent: 'files[].path' points to the file.<br/>content: 'files[].content' like prevContent |
+| files[].content | false    | ""                                    | string                 | You want to write in 'files[].path'.<br/>It can be a file path                                                      |
 
 # Changes
 
 ### 2019-04-28
 
 - `NEW` "creater-cli --use" command base
+
+### 2019-04-29
+
+- `NEW` config.format can be function array
