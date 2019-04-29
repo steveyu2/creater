@@ -74,7 +74,9 @@ function handleFile(config, fileOption) {
       formatFunc = data => format(data, content);
     } else if (ut.isArray(format)) {
       formatFunc = [...format];
-      formatFunc[0] = data => format[0](data, content);
+      formatFunc[0] = format[0]
+        ? data => format[0](data, content)
+        : () => content || '';
     }
 
     return writeFile(currFilePath, formatFunc).then(() =>
