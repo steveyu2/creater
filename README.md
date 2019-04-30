@@ -241,14 +241,14 @@ Warning:
 
 ## Config
 
-| name            | required | default                               | type                   | description                                                                                                         |
-| --------------- | -------- | ------------------------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| config          | false    | undefined                             | object                 | config                                                                                                              |
-| config.dir      | false    | ""                                    | string                 | dir                                                                                                                 |
-| files           | true     |                                       | array                  | dir                                                                                                                 |
-| files[].path    | true     |                                       | string                 | Files you need to create or change                                                                                  |
-| files[].format  | false    | (prevContent, content) => prevContent | function \| function[] | format content.<br/>prevContent: 'files[].path' points to the file.<br/>content: 'files[].content' like prevContent |
-| files[].content | false    | ""                                    | string                 | You want to write in 'files[].path'.<br/>It can be a file path                                                      |
+| name            | required | default                               | type                   | description                                                                                                          |
+| --------------- | -------- | ------------------------------------- | ---------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| config          | false    | undefined                             | object                 | config                                                                                                               |
+| config.dir      | false    | ""                                    | string                 | dir                                                                                                                  |
+| files           | true     |                                       | array                  | dir                                                                                                                  |
+| files[].path    | true     |                                       | string                 | Files you need to create or change                                                                                   |
+| files[].format  | false    | (prevContent, content) => prevContent | function \| function[] | format content.<br/>prevContent: 'files[].path' points to the file.<br/>content: 'files[].content' like prevContent  |
+| files[].content | false    | ""                                    | string                 | You want to write in 'files[].path'.<br/>It can be a file path<br/>path(eg. "@path:22.js" distinguish normal string) |
 
 ## helper
 
