@@ -1,11 +1,12 @@
 {
   "name": "creater-cli",
-  "version": "0.1.5",
+  "version": "0.1.7",
   "description": "A tool to help you reduce duplication of work in your code.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "npm publish"
+    "deploy": "npm publish",
+    "creater": "node ./bin/creater -u"
   },
   "dependencies": {
     "commander": "^2.20.0",
