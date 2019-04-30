@@ -35,20 +35,45 @@ Warning:
 
 ### example1
 
+> src/example1
+
+    // myUpdateFile.js
+    i am update file
+
 > creater/config1.js
+
+    const {helper} = require('creater-cli');
 
     module.exports = {
       config: {
-        dir: "src/example1"
+        dir: 'src/example1'
       },
       files: [
         {
-          path: "newFile.js",
-          content: "i am new file"
+          path: 'newFile.js',
+          content: 'i am new file'
         },
         {
-          path: "css/newFile.css",
-          content: "i am new css file in css folder"
+          path: 'css/newFile.css',
+          content: 'i am new css file in css folder'
+        },
+        {
+          path: 'myCopyFile1.js',
+          content: '@path:../temp.js'
+        },
+        {
+          path: 'myCopyFile2.js',
+          content: helper.withPath('../temp.js') // Equate to '@path:temp.js'
+        },
+        {
+          path: 'myCopyFile3.js',
+          format: (prevContent, content) => content + '\ni am copy from temp.js',
+          content: helper.withPath('../temp.js')
+        },
+        {
+          path: 'myUpdateFile.js',
+          format: (prevContent, content) => prevContent + '\n' + content + '\n' + 'update some thing',
+          content: helper.withPath('../temp.js')
         }
       ]
     };
@@ -64,14 +89,33 @@ Warning:
         :success
       -> file path: /Users/developer5/src/creater-example/src/example1/css/newFile.css
         :success
+      -> file path: /Users/developer5/src/creater-example/src/example1/myCopyFile1.js
+        :success
+      -> file path: /Users/developer5/src/creater-example/src/example1/myCopyFile2.js
+        :success
+      -> file path: /Users/developer5/src/creater-example/src/example1/myCopyFile3.js
+        :success
+      -> file path: /Users/developer5/src/creater-example/src/example1/myUpdateFile.js
+        :success
     .
 
 > src/example1
 
-    // src/example1/newFile.js
-    i am new file
-    // src/example1/css/newFile.css
-    i am new css file in css folder
+     // src/example1/newFile.js
+     i am new file
+     // src/example1/css/newFile.css
+     i am new css file in css folder
+     // src/example1/myCopyFile1.js
+     i am temp file
+     // src/example1/myCopyFile2.js
+     i am temp file
+     // src/example1/myCopyFile3.js
+     i am temp file
+     i am copy from temp.js
+     // src/example1/myUpdateFile.js
+     i am update file
+    +i am temp file
+    +update some thing
 
 ### example2
 
@@ -222,6 +266,11 @@ Warning:
     *  key string: Previous value
     *  value string: After value
     * @opts.global boolean default: true, Global replacement
+    */
+
+    /**
+    * withPath
+    * @path string path
     */
 
 # Changes

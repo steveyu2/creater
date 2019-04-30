@@ -52,14 +52,8 @@ function writeFile(path, formats) {
 
 function handleFile(config, fileOption) {
   const dir = config && config.dir ? config.dir : '';
-  let completePath = path.format({
-    dir: constant.dir,
-    name: dir
-  });
-  const currFilePath = path.format({
-    dir: completePath,
-    name: fileOption.path
-  });
+  let completePath = path.resolve(constant.dir, dir);
+  const currFilePath = path.resolve(completePath, fileOption.path);
   const format = fileOption.format;
 
   let _content = fileOption.content;
@@ -85,10 +79,10 @@ function handleFile(config, fileOption) {
   };
   // content is path
   if (/^@path\:/.test(_content)) {
-    const contentFilePath = path.format({
-      dir: completePath,
-      name: _content.replace('@path:', '')
-    });
+    const contentFilePath = path.resolve(
+      completePath,
+      _content.replace(/@path:\s{0,}/, '')
+    );
     return fse
       .readFile(contentFilePath, 'utf8')
       .then(data => otherActions(data));

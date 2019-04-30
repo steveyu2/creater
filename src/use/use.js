@@ -20,10 +20,7 @@ function validate(fileName) {
   }
 
   // 具体路径
-  const completePath = path.format({
-    dir: constant.dir,
-    name: fileName
-  });
+  const completePath = path.resolve(constant.dir, fileName);
   result.completePath = completePath;
 
   Log.push('read config file:');
