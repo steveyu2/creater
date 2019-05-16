@@ -1,6 +1,6 @@
 {
   "name": "creater-cli",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A tool to help you reduce duplication of work in your code.",
   "main": "index.js",
   "scripts": {
