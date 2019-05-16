@@ -83,19 +83,19 @@ Warning:
     npm run creater creater/config1.js
     .
     read config file:
-      -> file path: /Users/developer5/src/creater-example/creater/config1.js
+      -> file path: /.../creater-example/creater/config1.js
     handle file:
-      -> file path: /Users/developer5/src/creater-example/src/example1/newFile.js
+      -> file path: /.../creater-example/src/example1/newFile.js
         :success
-      -> file path: /Users/developer5/src/creater-example/src/example1/css/newFile.css
+      -> file path: /.../creater-example/src/example1/css/newFile.css
         :success
-      -> file path: /Users/developer5/src/creater-example/src/example1/myCopyFile1.js
+      -> file path: /.../creater-example/src/example1/myCopyFile1.js
         :success
-      -> file path: /Users/developer5/src/creater-example/src/example1/myCopyFile2.js
+      -> file path: /.../creater-example/src/example1/myCopyFile2.js
         :success
-      -> file path: /Users/developer5/src/creater-example/src/example1/myCopyFile3.js
+      -> file path: /.../creater-example/src/example1/myCopyFile3.js
         :success
-      -> file path: /Users/developer5/src/creater-example/src/example1/myUpdateFile.js
+      -> file path: /.../creater-example/src/example1/myUpdateFile.js
         :success
     .
 
@@ -203,11 +203,11 @@ Warning:
     npm run creater creater/config2.js
     .
     read config file:
-      -> file path: /Users/developer5/src/creater-example/creater/config2.js
+      -> file path: /.../creater-example/creater/config2.js
     handle file:
-      -> file path: /Users/developer5/src/creater-example/src/example2/actions.js
+      -> file path: /.../creater-example/src/example2/actions.js
         :success
-      -> file path: /Users/developer5/src/creater-example/src/example2/types.js
+      -> file path: /.../creater-example/src/example2/types.js
         :success
     .
 
