@@ -15,11 +15,11 @@ Warning:
 
 # Usage
 
-[See Example](https://github.com/qw110946/creater-example)
+[See Example](https://github.com/steveyu2/creater-example)
 
 > Clone example
 
-    clone https://github.com/qw110946/creater-example.git
+    clone https://github.com/steveyu2/creater-example.git
     npm install
 
 > package.json
